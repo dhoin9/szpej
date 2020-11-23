@@ -1,0 +1,8 @@
+INSERT INTO szpej.product (in_use, last, name, size) VALUES (true, 3, 'Buty letnie', '42'), (true, 3, 'Buty letnie', '44'), (true, 3, 'Buty letnie', '40'), (true, 3, 'Buty letnie', '41'), (true, 3, 'Buty letnie', '42'), (true, 3, 'Buty letnie', '44'), (true, 3, 'Buty letnie', '40'),
+ (true, 3, 'Buty letnie', '41'), (true, 3, 'Buty zimowe', '42'), (true, 3, 'Buty zimowe', '44'), (true, 3, 'Buty zimowe', '40'), (true, 3, 'Buty zimowe', '41'), (true, 3, 'Buty sportowe', '42'), (true, 3, 'Buty sportowe', '44'), (true, 3, 'Buty sportowe', '40'), (true, 3, 'Buty sportowe', '41'),
+ (true, 3, 'Mundur letni', 'Xl'), (true, 3, 'Mundur letni', 'M'), (true, 3, 'Mundur letni', 'S'), (true, 3, 'Mundur letni', 'L'),  (true, 3, 'Mundur zimowy', 'Xl'), (true, 3, 'Mundur zimowy', 'M'), (true, 3, 'Mundur zimowy', 'S'), (true, 3, 'Mundur zimowy', 'L')
+
+
+INSERT INTO szpej.warehouse (name) VALUES ('65 BLK'), ('61 BLK'), ('62 BLK'), ('35 BLK'), ('31 BLK'), ('11 BLK'), ('12 BLK'), ('13 BLK'), ('14 BLK'), ('21 BLK'), ('22 BLK'), ('23 BLK'), ('24 BLK')
+
+ INSERT INTO szpej.soldier (email, first_name, last_name, warehouse_id) VALUES ('ak@op.pl', 'Adam', 'Kowalski', 2), ('jk@op.pl', 'Jan', 'Kowalski', 1),('mk@op.pl', 'Micha', 'Kowalski', 12)
