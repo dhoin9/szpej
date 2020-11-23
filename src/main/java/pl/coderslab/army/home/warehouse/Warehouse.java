@@ -1,4 +1,4 @@
-package pl.coderslab.army.home.products;
+package pl.coderslab.army.home.warehouse;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +16,8 @@ public class Warehouse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+
 
 
 }

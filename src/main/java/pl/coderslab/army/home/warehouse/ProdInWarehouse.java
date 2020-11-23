@@ -1,21 +1,22 @@
-package pl.coderslab.army.home.products;
+package pl.coderslab.army.home.warehouse;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.army.home.products.Product;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-public class Soldier {
+public class ProdInWarehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String firstName;
-    private String lastName;
-    private String email;
     @ManyToOne
     private Warehouse warehouse;
+    @ManyToOne
+    private Product product;
+    private int quantity;
 
 }
