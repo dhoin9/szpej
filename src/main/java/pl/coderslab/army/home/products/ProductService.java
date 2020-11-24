@@ -6,6 +6,7 @@ public interface ProductService {
     public Product get(Long id);
 
     public List<Product> getProducts();
+    public List<String> getProductsName();
 
     public void add(Product product);
 

@@ -1,8 +1,9 @@
-package pl.coderslab.army.home.warehouse;
+package pl.coderslab.army.home.ProdInWarehouse;
 
 import lombok.Getter;
 import lombok.Setter;
 import pl.coderslab.army.home.products.Product;
+import pl.coderslab.army.home.warehouse.Warehouse;
 
 import javax.persistence.*;
 

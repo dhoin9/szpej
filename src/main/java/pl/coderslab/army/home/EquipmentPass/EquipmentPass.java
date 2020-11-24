@@ -1,7 +1,8 @@
-package pl.coderslab.army.home.products;
+package pl.coderslab.army.home.EquipmentPass;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.soldier.Soldier;
 import pl.coderslab.army.home.warehouse.Warehouse;
 
