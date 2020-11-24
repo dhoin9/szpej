@@ -2,6 +2,8 @@ package pl.coderslab.army.home.ProdInWarehouse;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.army.home.products.Product;
+import pl.coderslab.army.home.warehouse.Warehouse;
 
 import java.util.List;
 
@@ -19,6 +21,11 @@ public class JpaProdInWarehouseService implements ProdInWarehouseService {
     @Override
     public ProdInWarehouse get(Long id) {
         return repository.getOne(id);
+    }
+
+    @Override
+    public ProdInWarehouse get(Product product, Warehouse warehouse) {
+        return repository.findByProductAndWarehouse(product, warehouse);
     }
 
     @Override

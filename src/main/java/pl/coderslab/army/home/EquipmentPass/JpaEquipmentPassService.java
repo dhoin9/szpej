@@ -2,6 +2,7 @@ package pl.coderslab.army.home.EquipmentPass;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.army.home.ProdInWarehouse.ProdInWarehouseService;
 
 import java.util.List;
 
@@ -10,9 +11,11 @@ import java.util.List;
 public class JpaEquipmentPassService implements EquipmentPassService {
 
     private final EquipmentPassRepository repository;
+    private final ProdInWarehouseService prodInWarehouseService;
 
-    public JpaEquipmentPassService(EquipmentPassRepository repository) {
+    public JpaEquipmentPassService(EquipmentPassRepository repository, ProdInWarehouseService prodInWarehouseService) {
         this.repository = repository;
+        this.prodInWarehouseService = prodInWarehouseService;
     }
 
 
