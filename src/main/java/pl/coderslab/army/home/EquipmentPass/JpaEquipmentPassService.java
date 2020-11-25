@@ -3,6 +3,7 @@ package pl.coderslab.army.home.EquipmentPass;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.army.home.ProdInWarehouse.ProdInWarehouseService;
+import pl.coderslab.army.home.soldier.Soldier;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class JpaEquipmentPassService implements EquipmentPassService {
     @Override
     public List<EquipmentPass> getEquipmentPasses() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<EquipmentPass> getEquipmentPasses(Soldier soldier) {
+        return repository.findAllBySoldier(soldier);
     }
 
     @Override

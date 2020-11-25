@@ -1,8 +1,16 @@
 INSERT INTO szpej.product (in_use, last, name, size) VALUES (true, 3, 'Buty letnie', '42'), (true, 3, 'Buty letnie', '44'), (true, 3, 'Buty letnie', '40'), (true, 3, 'Buty letnie', '41'), (true, 3, 'Buty letnie', '42'), (true, 3, 'Buty letnie', '44'), (true, 3, 'Buty letnie', '40'),
  (true, 3, 'Buty letnie', '41'), (true, 3, 'Buty zimowe', '42'), (true, 3, 'Buty zimowe', '44'), (true, 3, 'Buty zimowe', '40'), (true, 3, 'Buty zimowe', '41'), (true, 3, 'Buty sportowe', '42'), (true, 3, 'Buty sportowe', '44'), (true, 3, 'Buty sportowe', '40'), (true, 3, 'Buty sportowe', '41'),
- (true, 3, 'Mundur letni', 'Xl'), (true, 3, 'Mundur letni', 'M'), (true, 3, 'Mundur letni', 'S'), (true, 3, 'Mundur letni', 'L'),  (true, 3, 'Mundur zimowy', 'Xl'), (true, 3, 'Mundur zimowy', 'M'), (true, 3, 'Mundur zimowy', 'S'), (true, 3, 'Mundur zimowy', 'L')
+ (true, 3, 'Mundur letni', 'Xl'), (true, 3, 'Mundur letni', 'M'), (true, 3, 'Mundur letni', 'S'), (true, 3, 'Mundur letni', 'L'),  (true, 3, 'Mundur zimowy', 'Xl'), (true, 3, 'Mundur zimowy', 'M'), (true, 3, 'Mundur zimowy', 'S'), (true, 3, 'Mundur zimowy', 'L');
 
 
-INSERT INTO szpej.warehouse (name) VALUES ('65 BLK'), ('61 BLK'), ('62 BLK'), ('35 BLK'), ('31 BLK'), ('11 BLK'), ('12 BLK'), ('13 BLK'), ('14 BLK'), ('21 BLK'), ('22 BLK'), ('23 BLK'), ('24 BLK')
+INSERT INTO szpej.warehouse (name) VALUES ('65 BLK'), ('61 BLK'), ('62 BLK'), ('35 BLK'), ('31 BLK'), ('11 BLK'), ('12 BLK'), ('13 BLK'), ('14 BLK'), ('21 BLK'), ('22 BLK'), ('23 BLK'), ('24 BLK');
 
- INSERT INTO szpej.soldier (email, first_name, last_name, warehouse_id) VALUES ('ak@op.pl', 'Adam', 'Kowalski', 2), ('jk@op.pl', 'Jan', 'Kowalski', 1),('mk@op.pl', 'Micha', 'Kowalski', 12)
+ INSERT INTO szpej.soldier (email, first_name, last_name, warehouse_id) VALUES ('ak@op.pl', 'Adam', 'Kowalski', 2), ('jk@op.pl', 'Jan', 'Kowalski', 1),('mk@op.pl', 'Micha', 'Kowalski', 12);
+ 
+ INSERT INTO szpej.prod_in_warehouse (quantity, product_id, warehouse_id) VALUES (100, 1, 1),  (100, 1, 2),  (100, 1, 3),  (100, 1, 4),  (100, 1, 5),  (100, 1, 6),  (100, 2, 1),  (100, 2, 2),  (100, 2, 3),  (100, 2, 4),  (100, 2, 5),  (100, 2, 6), 
+ (100, 3, 1),  (100, 3, 2),  (100, 3, 3),  (100, 3, 4),  (100, 3, 5), (100, 1, 6), 
+  (100, 4, 1),  (100, 4, 2),  (100, 4, 3),  (100, 4, 4),  (100, 4, 5),  (100, 4, 6), 
+ (100, 5, 1),  (100, 5, 2),  (100, 5, 3),  (100, 5, 4),  (100, 5, 5), (100, 5, 6), 
+  (100, 6, 1),  (100, 6, 2),  (100, 6, 3),  (100, 6, 4),  (100, 6, 5),  (100, 6, 6), 
+
+ 

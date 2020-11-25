@@ -27,7 +27,7 @@ public class Soldier {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", warehouse=" + warehouse.getName() +
+//                ", warehouse=" + warehouse.getName() +
                 '}';
     }
 }

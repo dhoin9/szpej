@@ -9,13 +9,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Book list</title>
+    <title>Soldier list</title>
+<h3>Soldier list</h3>
+</head>
+<body>
 <c:forEach items="${soldiers}" var="soldier">
+
     "${soldier}" <a href="/bookform/edit/${soldier.id}" >Edit</a>  <a href="/bookform/delete/${soldier.id}" >Delete</a></br>
 
 </c:forEach>
-</head>
-<body>
-
 </body>
 </html>

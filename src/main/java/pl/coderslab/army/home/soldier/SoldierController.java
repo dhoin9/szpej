@@ -43,7 +43,7 @@ public class SoldierController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String showRegistrationForm(Model model) {
         model.addAttribute("soldier", new Soldier());
-        return "soldier/newSoldier";
+        return "soldier/new";
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String allBooks(Model model){

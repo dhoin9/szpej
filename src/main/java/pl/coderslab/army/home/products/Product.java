@@ -20,4 +20,14 @@ public class Product {
     private int last;
     private boolean inUse;
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                ", last=" + last +
+                ", inUse=" + inUse +
+                '}';
+    }
 }
