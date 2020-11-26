@@ -37,10 +37,6 @@ public class EquipmentPassController {
         return productService.getProducts();
     }
 
-    //    @ModelAttribute("NameSize")
-//    public Map<String, List<String>> getMapNameSize(){
-//        return productService.getMapNameSize();
-//    }
     @ModelAttribute("NameSize")
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
@@ -58,11 +54,6 @@ public class EquipmentPassController {
 
     @GetMapping("/new")
     public String addEquipment(Model model) {
-//        EquipmentPassList equipmentPasses = new EquipmentPassList();
-
-//        for (int i = 0; i < 10; i++) {
-//            equipmentPasses.add(new EquipmentPass());
-//        }
         model.addAttribute("equipmentPasses", new EquipmentPassList());
         model.addAttribute("soldier", new Soldier());
         return "equipment/new";
@@ -71,17 +62,13 @@ public class EquipmentPassController {
     @ResponseBody
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String addEquipment(EquipmentPassList equipmentPasseslist) {
-        List<EquipmentPass> equipmentPasses = equipmentPasseslist.getEquipmentPassList();
-        Soldier soldier = soldierService.get(equipmentPasses.get(1).getSoldier().getId());
-        for (EquipmentPass equipment : equipmentPasses) {
-            System.out.println(equipment.getProduct());
-            System.out.println("qantity: " + equipment.getQuantity());
+        for (EquipmentPass equipment : equipmentPasseslist.getEquipmentPassList()) {
+            System.out.println("Product" + equipment.getProduct());//for development purpose
             ProdInWarehouse prodInWarehouse = prodInWarehouseService.get(equipment.getProduct(), equipment.getWarehouse());
             prodInWarehouse.setQuantity(prodInWarehouse.getQuantity() - equipment.getQuantity());
             prodInWarehouseService.update(prodInWarehouse);
             equipmentPassService.add(equipment);
         }
-
         return "redirect:/equipment/1" ;
 
     }
