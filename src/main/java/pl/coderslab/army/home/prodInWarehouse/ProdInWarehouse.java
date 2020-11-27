@@ -1,4 +1,4 @@
-package pl.coderslab.army.home.ProdInWarehouse;
+package pl.coderslab.army.home.prodInWarehouse;
 
 import lombok.Getter;
 import lombok.Setter;

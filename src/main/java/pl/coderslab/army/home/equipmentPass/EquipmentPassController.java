@@ -1,10 +1,10 @@
-package pl.coderslab.army.home.EquipmentPass;
+package pl.coderslab.army.home.equipmentPass;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.army.home.ProdInWarehouse.ProdInWarehouse;
-import pl.coderslab.army.home.ProdInWarehouse.ProdInWarehouseService;
+import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
+import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductService;
 import pl.coderslab.army.home.soldier.Soldier;
@@ -59,9 +59,9 @@ public class EquipmentPassController {
         return "equipment/new";
     }
 
-    @ResponseBody
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String addEquipment(EquipmentPassList equipmentPasseslist) {
+            Soldier soldier = equipmentPasseslist.getEquipmentPassList().get(0).getSoldier();
         for (EquipmentPass equipment : equipmentPasseslist.getEquipmentPassList()) {
             System.out.println("Product" + equipment.getProduct());//for development purpose
             ProdInWarehouse prodInWarehouse = prodInWarehouseService.get(equipment.getProduct(), equipment.getWarehouse());
@@ -69,7 +69,7 @@ public class EquipmentPassController {
             prodInWarehouseService.update(prodInWarehouse);
             equipmentPassService.add(equipment);
         }
-        return "redirect:/equipment/1" ;
+        return "redirect:/equipment/" +soldier.getId();
 
     }
 

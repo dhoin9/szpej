@@ -2,6 +2,7 @@ package pl.coderslab.army.home.soldier;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.army.home.users2.UserService;
 
 import java.util.List;
 
@@ -10,9 +11,11 @@ import java.util.List;
 public class JpaSoldierService implements SoldierService {
 
     private final SoldierRepository repository;
+    private final UserService userService;
 
-    public JpaSoldierService(SoldierRepository repository) {
+    public JpaSoldierService(SoldierRepository repository, UserService userService) {
         this.repository = repository;
+        this.userService = userService;
     }
 
 
@@ -28,7 +31,8 @@ public class JpaSoldierService implements SoldierService {
 
     @Override
     public void add(Soldier soldier) {
-        repository.save(soldier);
+        userService.saveUser(soldier);
+//        repository.save(soldier);
     }
 
     @Override

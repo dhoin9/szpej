@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/admin/order")
 public class OrderController {
 
     private final OrderService orderService;
@@ -39,7 +39,6 @@ public class OrderController {
         return "order/new";
     }
 
-    @ResponseBody
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String addOrder(OrderList orderList) {
         for (Order order : orderList.getOrderList()) {

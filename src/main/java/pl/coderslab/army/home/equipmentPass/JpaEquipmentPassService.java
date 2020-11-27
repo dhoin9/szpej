@@ -1,8 +1,8 @@
-package pl.coderslab.army.home.EquipmentPass;
+package pl.coderslab.army.home.equipmentPass;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.army.home.ProdInWarehouse.ProdInWarehouseService;
+import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.soldier.Soldier;
 
 import java.util.List;

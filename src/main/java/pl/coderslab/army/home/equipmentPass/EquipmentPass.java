@@ -1,4 +1,4 @@
-package pl.coderslab.army.home.EquipmentPass;
+package pl.coderslab.army.home.equipmentPass;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

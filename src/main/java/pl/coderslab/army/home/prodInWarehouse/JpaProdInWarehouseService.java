@@ -1,4 +1,4 @@
-package pl.coderslab.army.home.ProdInWarehouse;
+package pl.coderslab.army.home.prodInWarehouse;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;

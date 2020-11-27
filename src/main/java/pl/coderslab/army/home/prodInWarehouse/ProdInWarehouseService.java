@@ -1,4 +1,4 @@
-package pl.coderslab.army.home.ProdInWarehouse;
+package pl.coderslab.army.home.prodInWarehouse;
 
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.warehouse.Warehouse;
