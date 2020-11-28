@@ -9,7 +9,7 @@ import pl.coderslab.army.home.warehouse.WarehouseService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/soldier")
+@RequestMapping("admin/soldier")
 public class SoldierController {
 
     private final SoldierService soldierService;
@@ -48,7 +48,7 @@ public class SoldierController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public String allBooks(Model model){
         model.addAttribute("soldiers", soldierService.getSoldiers());
-        return "soldier/list";
+        return "soldier/table";
     }
 //    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
 //    public String getBook(@PathVariable long id, Model model) {
@@ -61,10 +61,9 @@ public class SoldierController {
 //        return new RedirectView("/bookform/all");
 //    }
 //
-//    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//    public RedirectView deleteBook(@PathVariable long id) {
-//        Book book = bookDao.findById(id);
-//        bookDao.delete(book);
-//        return new RedirectView("/bookform/all");
-//    }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteSoldier(@PathVariable long id) {
+        soldierService.delete(id);
+        return "redirect:/soldier/all";
+    }
 }

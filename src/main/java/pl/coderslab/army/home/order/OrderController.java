@@ -32,7 +32,7 @@ public class OrderController {
     }
 
 
-    @GetMapping("/new")
+    @GetMapping("/add")
     public String addOrder(Model model) {
         model.addAttribute("orders", new OrderList());
         model.addAttribute("soldier", new Soldier());
@@ -46,10 +46,14 @@ public class OrderController {
         return "redirect:/order/all" ;}
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String allBooks(Model model){
+    public String allOrders(Model model){
         model.addAttribute("orders", orderService.getOrders());
         return "order/list";
     }
-
+    @RequestMapping(value = "/total", method = RequestMethod.GET)
+    public String totalOrder(Model model){
+        model.addAttribute("orders",   orderService.getOrderTotal());
+        return "order/tableTotal";
+    }
 
 }

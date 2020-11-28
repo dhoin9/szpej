@@ -12,4 +12,7 @@ public interface OrderService {
     public void delete(Long id);
 
     public void update(Order order);
+
+    public List<String> getTotal();
+    public List<OrderTotal> getOrderTotal();
 }

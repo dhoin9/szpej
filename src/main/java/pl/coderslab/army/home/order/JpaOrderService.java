@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -15,6 +16,8 @@ public class JpaOrderService implements OrderService {
     public JpaOrderService(OrderRepository repository) {
         this.repository = repository;
     }
+
+
 
 
     @Override
@@ -41,6 +44,21 @@ public class JpaOrderService implements OrderService {
     public void update(Order order) {
         repository.save(order);
 
+    }
+
+    @Override
+    public List<String> getTotal() {
+        return repository.findOrderTotal();
+    }
+
+    public List<OrderTotal> getOrderTotal(){
+        List<OrderTotal> totalList = new ArrayList<>();
+        List<String> stringList = repository.findOrderTotal();
+        for (String str: stringList){
+            String[] strSplit=str.split(",");
+            OrderTotal orderTotal = new OrderTotal(strSplit[0],strSplit[1], strSplit[2], Integer.parseInt(strSplit[3]));
+            totalList.add(orderTotal);
+        }return totalList;
     }
 }
 
