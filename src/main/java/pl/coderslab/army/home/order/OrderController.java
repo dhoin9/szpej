@@ -22,10 +22,6 @@ public class OrderController {
         this.productService = productService;
     }
 
-    //    @ModelAttribute("products")
-//    public List<String> getProductsNames(){
-//        return productService.getProductsName();
-//    }
     @ModelAttribute("NameSize")
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
@@ -39,7 +35,7 @@ public class OrderController {
         return "order/new";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addOrder(OrderList orderList) {
         for (Order order : orderList.getOrderList()) {
             orderService.add(order); }
@@ -51,8 +47,8 @@ public class OrderController {
         return "order/list";
     }
     @RequestMapping(value = "/total", method = RequestMethod.GET)
-    public String totalOrder(Model model){
-        model.addAttribute("orders",   orderService.getOrderTotal());
+    public String totalOrderWithWarehouse(Model model){
+        model.addAttribute("orders",   orderService.mapOrders());
         return "order/tableTotal";
     }
 

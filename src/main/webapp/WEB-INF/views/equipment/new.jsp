@@ -17,7 +17,7 @@
 <%--        Size: <form:select path="product.id" items="${map.value}" itemLabel="size" itemValue="id"/></br>--%>
         Size: <form:select path="equipmentPassList[${status.index}].product" items="${map.value}" itemLabel="size" itemValue="id"/>
         Quantity <form:input path="equipmentPassList[${status.index}].quantity" value="1"/></br>
-        <form:hidden path="equipmentPassList[${status.index}].soldier" value="6" />
+        <form:hidden path="equipmentPassList[${status.index}].soldier" value="10" />
         <form:hidden path="equipmentPassList[${status.index}].warehouse.id" value="1"/>
     </c:forEach>
     <input type="submit" value="Save">

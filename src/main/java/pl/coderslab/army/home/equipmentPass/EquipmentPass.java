@@ -8,6 +8,7 @@ import pl.coderslab.army.home.soldier.Soldier;
 import pl.coderslab.army.home.warehouse.Warehouse;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -24,6 +25,7 @@ public class EquipmentPass {
     @ManyToOne
     private Warehouse warehouse;
     private int quantity;
+    private LocalDate expireDate;
 
     @Override
     public String toString() {
@@ -33,4 +35,6 @@ public class EquipmentPass {
                 ", quantity=" + quantity +
                 '}';
     }
+
+
 }

@@ -2,7 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@include file="header.jsp" %>
+<%--<%@include file="src/main/webapp/WEB-INF/views/header.jsp" %>--%>
+<jsp:include page="../header.jsp"/>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -22,31 +23,31 @@
                     <thead>
                     <tr>
                         <th>Lp.</th>
-                        <th>Product name</th>
+                        <th>Name</th>
                         <th>Size</th>
-<%--                        <th>Unit</th>--%>
+                        <th>Unit</th>
                         <th>Quantity</th>
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
                         <th>Lp.</th>
-                        <th>Product name</th>
+                        <th>Name</th>
                         <th>Size</th>
-<%--                        <th>Unit</th>--%>
+                        <th>Unit</th>
                         <th>Quantity</th>
                     </tr>
                     </tfoot>
                     <tbody>
                     <c:set var="count" value="0" scope="page"/>
-                    <c:forEach items="${orders}" var="order">
+                    <c:forEach items="${warehouses}" var="warehouse">
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
                             <th>${count}</th>
-                            <th>${order.key.name}</th>
-                            <th>${order.key.size}</th>
+                            <th>${warehouse.name}</th>
+<%--                            <th>${order.size}</th>--%>
 <%--                            <th>${order.warehouse}</th>--%>
-                            <th>${order.value}</th>
+<%--                            <th>${order.count}</th>--%>
                              </tr>
 
 

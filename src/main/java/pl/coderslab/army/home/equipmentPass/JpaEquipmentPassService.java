@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.soldier.Soldier;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,8 @@ public class JpaEquipmentPassService implements EquipmentPassService {
 
     @Override
     public void add(EquipmentPass equipmentPass) {
-
+        int years= equipmentPass.getProduct().getLast();
+        equipmentPass.setExpireDate(LocalDate.now().plusYears(years));
         repository.save(equipmentPass);
     }
 

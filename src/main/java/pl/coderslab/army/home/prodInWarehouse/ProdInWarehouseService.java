@@ -4,6 +4,7 @@ import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.warehouse.Warehouse;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProdInWarehouseService {
     public ProdInWarehouse get(Long id);
@@ -11,7 +12,8 @@ public interface ProdInWarehouseService {
     public ProdInWarehouse get(Product product, Warehouse warehouse);
 
     public List<ProdInWarehouse> getProdInWarehouses();
-
+    public List<ProdInWarehouse> getProdInWarehouses(Warehouse warehouse);
+    public Map<Product, Integer> getProdInWarehousesTotal();
     public void add(ProdInWarehouse prodInWarehouse);
 
     public void delete(Long id);

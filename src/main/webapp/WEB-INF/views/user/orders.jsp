@@ -17,9 +17,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Equipment List</h6>
-            <form action="<c:url value="/order"/>">
-            <input type="submit" value="Order list" class="btn btn-primary">
+            <form action="<c:url value="/order/new"/>">
+            <input type="submit" value="New order" class="btn btn-primary">
 
         </form>
 
@@ -33,8 +32,7 @@
                         <th>Name</th>
                         <th>Size</th>
                         <th>Quantity</th>
-                        <th>Expire date</th>
-                        <th>Enable</th>
+                        <th>Active</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -42,18 +40,17 @@
                     </tfoot>
                     <tbody>
                     <c:set var="count" value="0" scope="page"/>
-                    <c:forEach items="${equipments}" var="equipment">
+                    <c:forEach items="${orders}" var="order">
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
                             <th>${count}</th>
-                            <th>${equipment.product.name}</th>
-                            <th>${equipment.product.size}</th>
-                            <th>${equipment.quantity}</th>
+                            <th>${order.product.name}</th>
+                            <th>${order.product.size}</th>
+                            <th>${order.quantity}</th>
 <%--                            <th>${soldier.warehouse.name}</th>--%>
-                            <th>${equipment.expireDate}</th>
-                            <th><a href="/soldier/edit/${soldier.id}">Edit</a>
-                                <a href="/soldier/delete/${soldier.id}">Delete</a>
-                                <a href="/soldier/${soldier.id}">Details</a></th>
+                            <th>${order.active}</th>
+                            <th><a href="/order/delete/${order.id}">Delete</a>
+                                <a href="/order/edit/${order.id}">Edit</a></th>
                             </th>
                         </tr>
 

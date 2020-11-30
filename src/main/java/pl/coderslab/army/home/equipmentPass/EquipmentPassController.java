@@ -24,6 +24,7 @@ public class EquipmentPassController {
     private final SoldierService soldierService;
     private final WarehouseService warehouseService;
 
+
     public EquipmentPassController(EquipmentPassService equipmentPassService, ProdInWarehouseService prodInWarehouseService, ProductService productService, SoldierService soldierService, WarehouseService warehouseService) {
         this.equipmentPassService = equipmentPassService;
         this.prodInWarehouseService = prodInWarehouseService;
