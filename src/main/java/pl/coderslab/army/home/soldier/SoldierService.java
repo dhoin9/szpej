@@ -7,6 +7,8 @@ public interface SoldierService {
 
     public List<Soldier> getSoldiers();
 
+    public Soldier getSoldier(String email);
+
     public void add(Soldier soldier);
 
     public void delete(Long id);

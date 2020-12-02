@@ -1,8 +1,8 @@
 package pl.coderslab.army.home.soldier;
 
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.army.home.users2.UserService;
 
 import java.util.List;
 
@@ -11,11 +11,13 @@ import java.util.List;
 public class JpaSoldierService implements SoldierService {
 
     private final SoldierRepository repository;
-    private final UserService userService;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public JpaSoldierService(SoldierRepository repository, UserService userService) {
+    public JpaSoldierService(SoldierRepository repository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
         this.repository = repository;
-        this.userService = userService;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -30,9 +32,15 @@ public class JpaSoldierService implements SoldierService {
     }
 
     @Override
+    public Soldier getSoldier(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
     public void add(Soldier soldier) {
-        userService.saveUser(soldier);
-//        repository.save(soldier);
+        soldier.setPassword(passwordEncoder.encode(soldier.getPassword()));
+        soldier.setEnabled(1);
+        repository.save(soldier);
     }
 
     @Override

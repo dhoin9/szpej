@@ -13,7 +13,7 @@ import pl.coderslab.army.home.order.OrderService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductService;
 import pl.coderslab.army.home.soldier.Soldier;
-import pl.coderslab.army.home.users2.CurrentUser;
+import pl.coderslab.army.home.soldier.CurrentUser;
 
 import java.util.List;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class HomeController {
     @RequestMapping("/home")
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String home(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        Soldier soldier = customUser.getAppUser();
+        Soldier soldier = customUser.getSoldier();
         model.addAttribute("soldier", soldier);
         model.addAttribute("equipments",equipmentPassService.getEquipmentPasses(soldier) );
         return "user/home";
@@ -52,14 +52,14 @@ public class HomeController {
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
     public String allOrders(@AuthenticationPrincipal CurrentUser customUser, Model model){
-        Soldier soldier = customUser.getAppUser();
+        Soldier soldier = customUser.getSoldier();
         model.addAttribute("soldier", soldier);
         model.addAttribute("orders", orderService.getOrdersBySoldier(soldier));
         return "user/orders";
     }
     @GetMapping("order/new")
     public String addOrder(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        Soldier soldier = customUser.getAppUser();
+        Soldier soldier = customUser.getSoldier();
         model.addAttribute("orders", new OrderList());
         model.addAttribute("soldier", soldier);
         return "user/newOrder";

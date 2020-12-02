@@ -2,7 +2,6 @@ package pl.coderslab.army.home.soldier;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.coderslab.army.home.users2.Role;
 import pl.coderslab.army.home.warehouse.Warehouse;
 
 import javax.persistence.*;

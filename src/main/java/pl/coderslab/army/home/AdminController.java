@@ -12,7 +12,7 @@ import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductRepository;
 import pl.coderslab.army.home.soldier.Soldier;
-import pl.coderslab.army.home.users2.CurrentUser;
+import pl.coderslab.army.home.soldier.CurrentUser;
 import pl.coderslab.army.home.warehouse.Warehouse;
 import pl.coderslab.army.home.warehouse.WarehouseService;
 
@@ -42,7 +42,7 @@ public class AdminController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String details(@AuthenticationPrincipal CurrentUser customUser, Model model){
-        Soldier soldier = customUser.getAppUser();
+        Soldier soldier = customUser.getSoldier();
         Warehouse warehouse= soldier.getWarehouse();
         model.addAttribute("soldier", soldier);
         model.addAttribute("warehouse",warehouse);

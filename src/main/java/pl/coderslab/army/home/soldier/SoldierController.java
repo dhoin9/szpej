@@ -3,8 +3,6 @@ package pl.coderslab.army.home.soldier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.army.home.users2.Role;
-import pl.coderslab.army.home.users2.RoleRepository;
 import pl.coderslab.army.home.warehouse.Warehouse;
 import pl.coderslab.army.home.warehouse.WarehouseService;
 
