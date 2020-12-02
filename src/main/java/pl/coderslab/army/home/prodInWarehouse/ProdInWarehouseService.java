@@ -14,8 +14,8 @@ public interface ProdInWarehouseService {
     public List<ProdInWarehouse> getProdInWarehouses();
     public List<ProdInWarehouse> getProdInWarehouses(Warehouse warehouse);
     public Map<Product, Integer> getProdInWarehousesTotal();
+    public Map<Product, Integer> getProdInWarehousesTotal(Warehouse warehouse);
     public void add(ProdInWarehouse prodInWarehouse);
-
     public void delete(Long id);
 
     public void update(ProdInWarehouse prodInWarehouse);

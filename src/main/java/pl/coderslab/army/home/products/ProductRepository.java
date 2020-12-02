@@ -9,6 +9,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     public Product getById(long id);
 
+    @Query(value = "select p from Product p order by p.name")
+    public List<Product> getProductsOrderByName();
+
+
+
     @Query(value ="SELECT DISTINCT name from product", nativeQuery = true)
     public List<String> findAllUniqueName();
 

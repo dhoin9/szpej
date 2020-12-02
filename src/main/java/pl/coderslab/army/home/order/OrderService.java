@@ -12,12 +12,15 @@ public interface OrderService {
 
     public List<Order> getOrders();
     public List<Order> getOrdersBySoldier(Soldier soldier);
+    public List<Order> getOrdersBySoldierAndProduct(Soldier soldier, Product product);
     public void add(Order order);
     public void delete(Long id);
     public void update(Order order);
+    public void setInactiveOrders(List<Order> orders);
     public List<String> getTotal();
     public List<OrderTotal> getOrderTotal();
     public List<OrderTotal> getOrderByWarehouse(Warehouse warehouse);
+    public List<Order> ordersByWarehouse(Warehouse warehouse);
     public Map<Product, Integer> mapOrders();
-
+    public Map<Product, Integer> mapOrders(Warehouse warehouse);
 }

@@ -46,13 +46,46 @@ public class JpaProdInWarehouseService implements ProdInWarehouseService {
     @Override
     public Map<Product, Integer> getProdInWarehousesTotal() {
         Map<Product, Integer> map= new HashMap<>();
-       for(String text:repository.listProd()){
-           String[] array=text.split(",");
-           map.put(productRepository.getById(Long.parseLong(array[0])), Integer.valueOf(array[1]));
-       }
-
+        for (Product product : productRepository.findAll()) {
+            try {
+                if(repository.findAllByProduct(product)!=null)
+                {int quantity = 0;
+                    for(ProdInWarehouse prod:repository.findAllByProduct(product)){
+                        quantity+=prod.getQuantity();
+                    }
+                    map.put(product, quantity);
+                } else {
+                    map.put(product, 0);
+                }
+            } catch (NullPointerException e) {
+                System.out.println(product + " is empty");
+                map.put(product, 0);
+            }
+        }
         return map ;
     }
+
+    @Override
+    public Map<Product, Integer> getProdInWarehousesTotal(Warehouse warehouse) {
+        Map<Product, Integer> map = new HashMap<>();
+        for (Product product : productRepository.findAll()) {
+            try {
+                if(repository.findByProductAndWarehouse(product, warehouse)!=null)
+                {
+                    map.put(product, repository.findByProductAndWarehouse(product, warehouse).getQuantity());
+                } else {
+                    map.put(product, 0);
+                }
+            } catch (NullPointerException e) {
+                System.out.println(product + " is empty");
+                map.put(product, 0);
+            }
+        }
+        return map;
+
+    }
+
+
 
     @Override
     public void add(ProdInWarehouse prodInWarehouse) {

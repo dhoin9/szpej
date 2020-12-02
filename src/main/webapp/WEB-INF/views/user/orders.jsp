@@ -17,10 +17,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <form action="<c:url value="/order/new"/>">
-            <input type="submit" value="New order" class="btn btn-primary">
-
-        </form>
+            <a class="btn btn-primary" href="/order/new">New Order</a>
 
         </div>
         <div class="card-body">

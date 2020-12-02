@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.soldier.Soldier;
+import pl.coderslab.army.home.warehouse.Warehouse;
 
 import javax.persistence.*;
 
@@ -22,17 +23,9 @@ public class Order {
     private int quantity;
     @ManyToOne
     private Soldier soldier;
+    @ManyToOne
+    private Warehouse warehouse;
     private boolean active=true;
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", product=" + product +
-                ", quantity=" + quantity +
-                ", soldier=" + soldier.getEmail() +
-                ", warehouse=" + soldier.getWarehouse().getName() +
-                ", active=" + active +
-                '}';
-    }
+
 }

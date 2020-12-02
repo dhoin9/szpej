@@ -21,8 +21,10 @@ public class Soldier {
     private String email;
     private String password;
     private int enabled;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
+
     @ManyToOne
     private Warehouse warehouse;
 
@@ -33,7 +35,10 @@ public class Soldier {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-//                ", warehouse=" + warehouse.getName() +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", roles=" + roles.toString() +
+                ", warehouse=" + warehouse.getName() +
                 '}';
     }
 }

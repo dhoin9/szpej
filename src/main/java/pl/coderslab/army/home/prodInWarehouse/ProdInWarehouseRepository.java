@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface ProdInWarehouseRepository extends JpaRepository<ProdInWarehouse, Long> {
 
-public ProdInWarehouse findByProductAndWarehouse(Product product, Warehouse warehouse);
+    public ProdInWarehouse findByProductAndWarehouse(Product product, Warehouse warehouse);
 
     public List<ProdInWarehouse> findAllByWarehouse(Warehouse warehouse);
 

@@ -40,6 +40,11 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    public List<Order> getOrdersBySoldierAndProduct(Soldier soldier, Product product) {
+        return repository.findOrdersBySoldierAndProduct(soldier, product);
+    }
+
+    @Override
     public void add(Order order) {
         repository.save(order);
     }
@@ -53,6 +58,14 @@ public class JpaOrderService implements OrderService {
     public void update(Order order) {
         repository.save(order);
 
+    }
+
+    @Override
+    public void setInactiveOrders(List<Order> orders) {
+        for (Order order : orders) {
+            order.setActive(false);
+            update(order);
+        }
     }
 
     @Override
@@ -80,19 +93,55 @@ public class JpaOrderService implements OrderService {
             OrderTotal orderTotal = new OrderTotal(strSplit[0], strSplit[1], strSplit[2], Integer.parseInt(strSplit[3]));
             totalList.add(orderTotal);
         }
-            return totalList;
+        return totalList;
+    }
+
+    @Override
+    public List<Order> ordersByWarehouse(Warehouse warehouse) {
+        List<Order> orders = new ArrayList<>();
+        List<String> orderString = repository.allOrdersByWarehouse(warehouse.getId());
+        for (String str : orderString) {
+            orders.add(repository.getOne(Long.valueOf(str)));
+        }
+        return orders;
     }
 
     @Override
     public Map<Product, Integer> mapOrders() {
         Map<Product, Integer> map = new HashMap<>();
-        List<String> products= repository.findProducts();
-        for(String str:products){
-            Product product = productService.get(Long.valueOf(str));
-            map.put(product, repository.countAllByProduct(product));
+        for (Product product : productService.getProducts()) {
+            try {
+                if (repository.sumByProduct(product.getId()).equals("")) {
+                    map.put(product, 0);
+                } else {
+                    map.put(product, Integer.valueOf(repository.sumByProduct(product.getId())));
+                }
+            } catch (NullPointerException e) {
+                System.out.println(product + " is empty");
+                map.put(product, 0);
+            }
         }
         return map;
     }
+
+    public Map<Product, Integer> mapOrders(Warehouse warehouse) {
+        Map<Product, Integer> map = new HashMap<>();
+
+        for (Product product : productService.getProducts()) {
+            try {
+                if (repository.sumByWarehouseAndProduct(warehouse.getId(), product.getId()).equals("")) {
+                    map.put(product, 0);
+                } else {
+                    map.put(product, Integer.valueOf(repository.sumByWarehouseAndProduct(warehouse.getId(), product.getId())));
+                }
+            } catch (NullPointerException e) {
+                System.out.println(product + " is empty");
+                map.put(product, 0);
+            }
+        }
+        return map;
+    }
+
 }
 
 

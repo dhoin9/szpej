@@ -3,6 +3,8 @@ package pl.coderslab.army.home.equipmentPass;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.army.home.order.Order;
+import pl.coderslab.army.home.order.OrderService;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
@@ -15,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/equipment")
+@RequestMapping("admin/equipment")
 public class EquipmentPassController {
 
     private final EquipmentPassService equipmentPassService;
@@ -23,14 +25,16 @@ public class EquipmentPassController {
     private final ProductService productService;
     private final SoldierService soldierService;
     private final WarehouseService warehouseService;
+    private final OrderService orderService;
 
 
-    public EquipmentPassController(EquipmentPassService equipmentPassService, ProdInWarehouseService prodInWarehouseService, ProductService productService, SoldierService soldierService, WarehouseService warehouseService) {
+    public EquipmentPassController(EquipmentPassService equipmentPassService, ProdInWarehouseService prodInWarehouseService, ProductService productService, SoldierService soldierService, WarehouseService warehouseService, OrderService orderService) {
         this.equipmentPassService = equipmentPassService;
         this.prodInWarehouseService = prodInWarehouseService;
         this.productService = productService;
         this.soldierService = soldierService;
         this.warehouseService = warehouseService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute("products")
@@ -53,24 +57,28 @@ public class EquipmentPassController {
         return soldierService.getSoldiers();
     }
 
-    @GetMapping("/new")
-    public String addEquipment(Model model) {
+    @GetMapping("/{id}/new")
+    public String addEquipment(@PathVariable long id, Model model) {
         model.addAttribute("equipmentPasses", new EquipmentPassList());
-        model.addAttribute("soldier", new Soldier());
-        return "equipment/new";
+        model.addAttribute("soldier", soldierService.get(id));
+        return "admin/newEquipment";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addEquipment(EquipmentPassList equipmentPasseslist) {
-            Soldier soldier = equipmentPasseslist.getEquipmentPassList().get(0).getSoldier();
+    @RequestMapping(value = "/{id}/new", method = RequestMethod.POST)
+    public String addEquipment( EquipmentPassList equipmentPasseslist) {
+        Soldier soldier = equipmentPasseslist.getEquipmentPassList().get(0).getSoldier();
         for (EquipmentPass equipment : equipmentPasseslist.getEquipmentPassList()) {
             System.out.println("Product" + equipment.getProduct());//for development purpose
-            ProdInWarehouse prodInWarehouse = prodInWarehouseService.get(equipment.getProduct(), equipment.getWarehouse());
-            prodInWarehouse.setQuantity(prodInWarehouse.getQuantity() - equipment.getQuantity());
-            prodInWarehouseService.update(prodInWarehouse);
-            equipmentPassService.add(equipment);
+            if (equipment.getQuantity() > 0) {
+                List<Order> orders= orderService.getOrdersBySoldierAndProduct(soldier,equipment.getProduct());
+                orderService.setInactiveOrders(orders);
+                ProdInWarehouse prodInWarehouse = prodInWarehouseService.get(equipment.getProduct(), equipment.getWarehouse());
+                prodInWarehouse.setQuantity(prodInWarehouse.getQuantity() - equipment.getQuantity());
+                prodInWarehouseService.update(prodInWarehouse);
+                equipmentPassService.add(equipment);
+            }
         }
-        return "redirect:/equipment/" +soldier.getId();
+        return "redirect:";
 
     }
 
@@ -81,7 +89,12 @@ public class EquipmentPassController {
         List<EquipmentPass> equipmentPass = equipmentPassService.getEquipmentPasses(soldier);
         model.addAttribute("equipmentPass", equipmentPass);
         model.addAttribute("soldier", soldier);
-        return "equipment/list";
+        return "admin/soldierEquipment";
     }
 
+    @RequestMapping(value = "/{id}/delete/{idd}", method = RequestMethod.GET)
+    public String deleteEquipment(@PathVariable long idd, @PathVariable long id) {
+        equipmentPassService.delete(idd);
+        return "redirect:/admin/equipment/{id}";
+    }
 }

@@ -62,12 +62,13 @@ public class HomeController {
         Soldier soldier = customUser.getAppUser();
         model.addAttribute("orders", new OrderList());
         model.addAttribute("soldier", soldier);
-        return "user/new";
+        return "user/newOrder";
     }
 
     @RequestMapping(value = "order/new", method = RequestMethod.POST)
     public String addOrder(OrderList orderList) {
         for (Order order : orderList.getOrderList()) {
+            if(order.getQuantity()>0)
             orderService.add(order); }
         return "redirect:/order" ;}
 
@@ -86,9 +87,13 @@ public class HomeController {
 
     @RequestMapping(value = "order/edit/{id}", method = RequestMethod.POST)
     public String editOrder(Order order) {
-        System.out.println(order);
         orderService.update(order);
         return "redirect:/order" ;
+    }
+    @RequestMapping(value = "/order/delete/{id}", method = RequestMethod.GET)
+    public String deleteEquipment(@PathVariable long id) {
+        orderService.delete(id);
+        return "redirect:/order";
     }
 
 }
