@@ -55,6 +55,13 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    public void deleteList(List<Order> orders) {
+    for(Order order: orders){
+        repository.delete(order);
+    }
+    }
+
+    @Override
     public void update(Order order) {
         repository.save(order);
 

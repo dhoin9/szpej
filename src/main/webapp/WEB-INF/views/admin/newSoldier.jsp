@@ -17,11 +17,16 @@
 
         <form:form method="post" modelAttribute="soldier">
             <br> Fist Name <form:input path="firstName"/>
+            <form:errors path="firstName" style="color:red"/>
             <br> Last Name <form:input path="lastName"/>
-            <br> Email <form:input path="email"/>
+            <form:errors path="lastName" style="color:red"/>
+
+            <br> Email <form:input path="email"/> <c:out value="${error}"></c:out>
+            <form:errors path="email" style="color:red"/>
             <br> Password <form:input path="password"/>
             <br> Warehouse <form:select path="warehouse.id" items="${warehouses}" itemLabel="name"  itemValue="id"/>
-            <br> Role <form:checkboxes path="roles" items="${roles}" itemLabel="name"  itemValue="id" />
+            <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />
+            <br> Enabled <form:checkbox path="enabled" value="1" />
             <br>  <input type="submit" value="Save">
              </form:form>
 
@@ -95,7 +100,7 @@
 <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
 <%--<script src="<c:url value="/resources/js/demo/chart-area-demo.js" />"></script>--%>
 <%--<script src="<c:url value="/resources/js/demo/chart-pie-demo.js" />"></script>--%>
-
+<script src="js/password-check.js"></script>
 </body>
 
 </html>

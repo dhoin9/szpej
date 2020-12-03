@@ -15,6 +15,7 @@ public interface OrderService {
     public List<Order> getOrdersBySoldierAndProduct(Soldier soldier, Product product);
     public void add(Order order);
     public void delete(Long id);
+    public void deleteList(List<Order> orders);
     public void update(Order order);
     public void setInactiveOrders(List<Order> orders);
     public List<String> getTotal();

@@ -17,12 +17,9 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+                <a class="btn btn-primary" href="/admin/equipment/${soldier.id}/new">Add Szpej</a>
+
                 <h6 class="m-0 font-weight-bold text-primary">Equipment List</h6>
-                <form action="<c:url value="${soldier.id}/new"/>">
-                    <input type="submit" value="Add Szpej" class="btn btn-primary">
-
-                </form>
-
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -50,7 +47,8 @@
                                 <th>${equipment.product.size}</th>
                                 <th>${equipment.quantity}</th>
                                 <th>${equipment.expireDate}</th>
-                                <th><a href="/admin/equipment/${soldier.id}/delete/${equipment.id}">Delete</a>
+                                <th><a href="/admin/equipment/${soldier.id}/delete/${equipment.id}"
+                                       onclick="return confirm('Are you sure to delete')">Delete</a>
 
                                 </th>
                             </tr>

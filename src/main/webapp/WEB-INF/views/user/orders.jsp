@@ -46,7 +46,8 @@
                             <th>${order.quantity}</th>
 <%--                            <th>${soldier.warehouse.name}</th>--%>
                             <th>${order.active}</th>
-                            <th><a href="/order/delete/${order.id}">Delete</a>
+                            <th><a href="/order/delete/${order.id}"
+                                   onclick="return confirm('Are you sure to delete')">Delete</a>
                                 <a href="/order/edit/${order.id}">Edit</a></th>
                             </th>
                         </tr>

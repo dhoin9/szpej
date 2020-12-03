@@ -3,6 +3,8 @@ package pl.coderslab.army.home.soldier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import pl.coderslab.army.home.order.Order;
+import pl.coderslab.army.home.order.OrderService;
 
 import java.util.List;
 
@@ -13,11 +15,13 @@ public class JpaSoldierService implements SoldierService {
     private final SoldierRepository repository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final OrderService orderService;
 
-    public JpaSoldierService(SoldierRepository repository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
+    public JpaSoldierService(SoldierRepository repository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder, OrderService orderService) {
         this.repository = repository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
 
@@ -45,6 +49,13 @@ public class JpaSoldierService implements SoldierService {
 
     @Override
     public void delete(Long id) {
+        Soldier soldier= repository.getOne(id);
+        List<Order> orders = orderService.getOrdersBySoldier(soldier);
+        orderService.deleteList(orders);
+      for(Role role:soldier.getRoles()){
+          soldier.getRoles().remove(role);
+          update(soldier);
+      }
     repository.deleteById(id);
     }
 
@@ -53,6 +64,7 @@ public class JpaSoldierService implements SoldierService {
         repository.save(soldier);
 
     }
+
 }
 
 
