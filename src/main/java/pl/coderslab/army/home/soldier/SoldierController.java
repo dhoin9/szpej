@@ -33,27 +33,25 @@ public class SoldierController {
         return roleRepository.findAll();
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/{id}")
     public String getSoldier(@PathVariable long id) {
         Soldier soldier = soldierService.get(id);
         return soldier.toString();
     }
-        @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addSoldier(@Valid @ModelAttribute("soldier") Soldier soldier,  BindingResult result, Model model){
-        List<Soldier> soldiers = soldierService.getSoldiers();
-        for(Soldier sold:soldiers){
-            if(soldier.getEmail().equals(sold.getEmail())){
-                model.addAttribute("error", "already exist");
-                return "admin/newSoldier";
-            }
-        }
-        if(result.hasErrors()){
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String addSoldier(@Valid @ModelAttribute("soldier") Soldier soldier, BindingResult result, Model model) {
+        if (soldierService.getSoldier(soldier.getEmail()) != null) {
+            model.addAttribute("error", "already exist");
             return "admin/newSoldier";
-        }else{
-        soldierService.add(soldier);
-        return "redirect:/admin/soldier";}
+        }
+        if (result.hasErrors()) {
+            return "admin/newSoldier";
+        } else {
+            soldierService.add(soldier);
+            return "redirect:/admin/soldier";
+        }
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)

@@ -6,8 +6,7 @@ import pl.coderslab.army.home.soldier.Soldier;
 import java.util.List;
 
 public interface EquipmentPassRepository extends JpaRepository<EquipmentPass, Long> {
-
-public List<EquipmentPass> findAllBySoldier(Soldier soldier);
+    List<EquipmentPass> findAllBySoldier(Soldier soldier);
 
 
 }
