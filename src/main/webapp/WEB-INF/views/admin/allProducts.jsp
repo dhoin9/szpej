@@ -24,9 +24,9 @@
                         <th>Lp.</th>
                         <th>Product Name</th>
                         <th>Product Size</th>
+                        <th>In Use</th>
                         <th>Stock</th>
                         <th>Ordered</th>
-<%--                        <th>Enable</th>--%>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -35,9 +35,9 @@
                         <th>Lp.</th>
                         <th>Product Name</th>
                         <th>Product Size</th>
+                        <th>In Use</th>
                         <th>Stock</th>
                         <th>Ordered</th>
-                        <%--                        <th>Enable</th>--%>
                         <th>Actions</th>
                     </tr>
                     </tfoot>
@@ -50,6 +50,7 @@
                             <th>${count}</th>
                             <th>${prod.name}</th>
                             <th>${prod.size}</th>
+                            <th>${prod.inUse}</th>
                             <th>${prodIn.get(prod)}</th>
                             <th>${orders.get(prod)}</th>
                         <th> <a href="/admin/product/${prod.id}" >Details </a>
