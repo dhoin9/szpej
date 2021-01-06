@@ -49,6 +49,7 @@ public class SoldierController {
         if (result.hasErrors()) {
             return "admin/newSoldier";
         } else {
+            System.out.println(soldier.toString());
             soldierService.add(soldier);
             return "redirect:/admin/soldier";
         }

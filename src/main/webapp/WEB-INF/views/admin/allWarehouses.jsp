@@ -41,7 +41,7 @@
                         <tr>
                             <th>${count}</th>
                             <th>${warehouse.name}</th>
-                            <th> <a href="/admin/warehouse/${warehouse.id}" >Details</a></th>
+                            <th> <a href="/admin/warehouse/${warehouse.id}/" >Details</a></th>
 
                         </tr>
 

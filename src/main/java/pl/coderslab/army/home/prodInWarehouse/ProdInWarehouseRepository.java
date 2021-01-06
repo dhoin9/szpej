@@ -10,11 +10,11 @@ import java.util.Map;
 
 public interface ProdInWarehouseRepository extends JpaRepository<ProdInWarehouse, Long> {
 
-    public ProdInWarehouse findByProductAndWarehouse(Product product, Warehouse warehouse);
+    ProdInWarehouse findByProductAndWarehouse(Product product, Warehouse warehouse);
 
-    public List<ProdInWarehouse> findAllByWarehouse(Warehouse warehouse);
+    List<ProdInWarehouse> findAllByWarehouse(Warehouse warehouse);
 
-    public List<ProdInWarehouse> findAllByProduct(Product product);
+    List<ProdInWarehouse> findAllByProduct(Product product);
 
     @Query(value = "SELECT product_id, SUM(quantity) FROM prod_in_warehouse group by product_id;", nativeQuery = true)
     public Map<Integer, Integer> totalProd();

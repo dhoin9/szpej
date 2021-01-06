@@ -49,14 +49,11 @@ public class JpaSoldierService implements SoldierService {
 
     @Override
     public void delete(Long id) {
-        Soldier soldier= repository.getOne(id);
+        Soldier soldier = repository.getOne(id);
         List<Order> orders = orderService.getOrdersBySoldier(soldier);
         orderService.deleteList(orders);
-      for(Role role:soldier.getRoles()){
-          soldier.getRoles().remove(role);
-          update(soldier);
-      }
-    repository.deleteById(id);
+        soldier.getRoles().clear();
+        repository.deleteById(id);
     }
 
     @Override

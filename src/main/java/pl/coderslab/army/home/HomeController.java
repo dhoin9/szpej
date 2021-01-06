@@ -12,9 +12,9 @@ import pl.coderslab.army.home.order.OrderList;
 import pl.coderslab.army.home.order.OrderService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductService;
-import pl.coderslab.army.home.soldier.Soldier;
-import pl.coderslab.army.home.soldier.CurrentUser;
+import pl.coderslab.army.home.soldier.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -25,11 +25,15 @@ public class HomeController {
     private final EquipmentPassService equipmentPassService;
     private final OrderService orderService;
     private final ProductService productService;
+    private final RoleRepository roleRepository;
+    private final SoldierService soldierService;
 
-    public HomeController(EquipmentPassService equipmentPassService, OrderService orderService, ProductService productService) {
+    public HomeController(EquipmentPassService equipmentPassService, OrderService orderService, ProductService productService, RoleRepository roleRepository, SoldierService soldierService) {
         this.equipmentPassService = equipmentPassService;
         this.orderService = orderService;
         this.productService = productService;
+        this.roleRepository = roleRepository;
+        this.soldierService = soldierService;
     }
     @ModelAttribute("NameSize")
     public Map<String, List<Product>> getMapNameProduct() {
@@ -94,6 +98,23 @@ public class HomeController {
     public String deleteEquipment(@PathVariable long id) {
         orderService.delete(id);
         return "redirect:/order";
+    }
+
+    @GetMapping("/createAdmin")
+    public String createAdmin(){
+        Soldier soldier = new Soldier();
+        soldier.setEnabled(1);
+        soldier.setPassword("ad");
+        soldier.setEmail("ad@op.pl");
+        Role role = roleRepository.findByName("ROLE_ADMIN");
+        HashSet roles = new HashSet();
+        if(role==null){
+            role= new Role("ROLE_ADMIN");
+        }
+        roles.add(role);
+        soldier.setRoles(roles);
+        soldierService.add(soldier);
+        return "user/home";
     }
 
 }
