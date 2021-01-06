@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.army.home.order.OrderService;
+import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductRepository;
@@ -66,6 +67,24 @@ public class WarehouseController {
         model.addAttribute("prodIn", prodInWarehouseService.getProdInWarehousesTotal(warehouse));
         model.addAttribute("orders", orderService.mapOrders(warehouse));
         return "admin/detailsWarehouse";
+    }
+
+    @RequestMapping(value = "/{id}/{idp}", method = RequestMethod.GET)
+    public String productsUpdate(@PathVariable long id, @PathVariable long idp, Model model){
+        Warehouse warehouse= warehouseService.get(id);
+        Product product=productService.get(idp);
+        ProdInWarehouse prodInWarehouse = prodInWarehouseService.get(product,warehouse);
+        if(prodInWarehouse==null){
+            prodInWarehouse = new ProdInWarehouse(warehouse, product, 0);
+            prodInWarehouseService.add(prodInWarehouse);
+        }
+        model.addAttribute("prodInWar", prodInWarehouse);
+        return "admin/addProdWarehouse";
+    }
+    @RequestMapping(value = "/{id}/{idp}", method = RequestMethod.POST)
+    public String productsUpdate(@PathVariable long id, ProdInWarehouse prodIn){
+        prodInWarehouseService.update(prodIn);
+        return "redirect:/admin/warehouse/"+id;
     }
 
 }

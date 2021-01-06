@@ -53,8 +53,8 @@
                             <th>${prod.inUse}</th>
                             <th>${prodIn.get(prod)}</th>
                             <th>${orders.get(prod)}</th>
-                        <th> <a href="/admin/product/${prod.id}" >Details </a>
-                            <a href="orders by product id and warehouse" >UpdateStock</a></th>
+                        <th> <a href="/admin/product/${prod.id}" >Stock   </a>
+                            <a href="/admin/product/${prod.id}/edit" >   Edit</a></th>
                             </th>
                              </tr>
                     </c:forEach>

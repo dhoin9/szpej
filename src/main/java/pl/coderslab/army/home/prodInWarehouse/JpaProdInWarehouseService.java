@@ -82,10 +82,7 @@ public class JpaProdInWarehouseService implements ProdInWarehouseService {
             }
         }
         return map;
-
     }
-
-
 
     @Override
     public void add(ProdInWarehouse prodInWarehouse) {

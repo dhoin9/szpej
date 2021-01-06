@@ -26,8 +26,8 @@ public class Soldier {
     private String password;
     private int enabled;
   @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="soldier_roles",joinColumns = {@JoinColumn(name = "soldier_id")},
-    inverseJoinColumns = {@JoinColumn(name = "roles_id")})
+//    @JoinTable(name="soldier_roles",joinColumns = {@JoinColumn(name = "soldier_id")},
+//    inverseJoinColumns = {@JoinColumn(name = "roles_id")})
     private Set<Role> roles;
     @ManyToOne
     private Warehouse warehouse;

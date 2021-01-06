@@ -2,80 +2,43 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="header.jsp" %>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">${warehouse.name}</h1>
-<%--        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>--%>
+    <h1 class="h3 mb-2 text-gray-800">Edit Product</h1>
+    <%--        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>--%>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Product List</h6>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Product Name</th>
-                        <th>Product Size</th>
-                        <th>Stock</th>
-                        <th>Ordered</th>
-<%--                        <th>Enable</th>--%>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Lp.</th>
-                        <th>Product Name</th>
-                        <th>Product Size</th>
-                        <th>Stock</th>
-                        <th>Ordered</th>
-                        <%--                        <th>Enable</th>--%>
-                        <th>Actions</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
 
-                    <c:set var="count" value="0" scope="page"/>
-                    <c:forEach items="${products}" var="prod">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
-                        <tr>
-                            <th>${count}</th>
-                            <th>${prod.name}</th>
-                            <th>${prod.size}</th>
-                            <th>${prodIn.get(prod)}</th>
-                            <th>${orders.get(prod)}</th>
-                        <th> <a href="orders by product id and warehouse" >Orders </a>
-                            <a href="/admin/warehouse/${warehouse.id}/${prod.id}" >UpdateStock</a></th>
-                            </th>
-                             </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+        <form:form method="post" modelAttribute="product">
+            <br> Name :<form:input path="name" value="${name}"/>
+            <br> Size  :<form:input path="size" value="${size}"/>
+            <br> Last :<form:input path="last" value="${last}"/>
+<%--            <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />--%>
+            <br>  In use: Yes <form:radiobutton path="inUse" value="true"/>
+            No <form:radiobutton path="inUse" value="false"/>
+
+            <br>  <input type="submit" value="Save">
+        </form:form>
+
+    </div>
+    <!-- /.container-fluid -->
+
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright CAK&copy; Szpej 2020</span>
             </div>
         </div>
-    </div>
-
-</div>
-<!-- /.container-fluid -->
-
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright CAK&copy; Szpej 2020</span>
-        </div>
-    </div>
-</footer>
-<!-- End of Footer -->
+    </footer>
+    <!-- End of Footer -->
 
 </div>
 <!-- End of Content Wrapper -->
@@ -136,4 +99,4 @@
 
 </body>
 
-</html>pro
+</html>
