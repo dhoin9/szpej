@@ -27,7 +27,6 @@ public class OrderController {
         return productService.getMapNameProduct();
     }
 
-
     @GetMapping("/add")
     public String addOrder(Model model) {
         model.addAttribute("orders", new OrderList());

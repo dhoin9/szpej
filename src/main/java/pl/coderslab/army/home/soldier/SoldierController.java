@@ -4,9 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+import pl.coderslab.army.exceptions.SoldierNotFound;
 import pl.coderslab.army.home.warehouse.Warehouse;
 import pl.coderslab.army.home.warehouse.WarehouseService;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,17 +20,20 @@ public class SoldierController {
     private final SoldierService soldierService;
     private final WarehouseService warehouseService;
     private final RoleRepository roleRepository;
+    private final SoldierRepository soldierRepository;
 
-    public SoldierController(SoldierService soldierService, WarehouseService warehouseService, RoleRepository roleRepository) {
+    public SoldierController(SoldierService soldierService, WarehouseService warehouseService, RoleRepository roleRepository, SoldierRepository soldierRepository) {
         this.soldierService = soldierService;
         this.warehouseService = warehouseService;
         this.roleRepository = roleRepository;
+        this.soldierRepository = soldierRepository;
     }
 
     @ModelAttribute("warehouses")
     public List<Warehouse> allWarehouses() {
         return warehouseService.getWarehouses();
     }
+
     @ModelAttribute("roleList")
     public List<Role> allRole() {
         return roleRepository.findAll();
@@ -37,6 +43,21 @@ public class SoldierController {
     @RequestMapping(value = "/{id}")
     public String getSoldier(@PathVariable long id) {
         Soldier soldier = soldierService.get(id);
+
+        try {
+            soldier.toString();
+        } catch (SoldierNotFound s) {
+            s.SoldierNotFound();
+            System.out.println("nie ma kolegi");
+
+        } catch (EntityNotFoundException e) {
+            System.out.println("entity błąd");
+            new RedirectView("/404");
+            e.getMessage();
+            return "nie ma kolegi";
+
+        }
+
         return soldier.toString();
     }
 
@@ -60,25 +81,50 @@ public class SoldierController {
         model.addAttribute("soldier", new Soldier());
         return "admin/newSoldier";
     }
+
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String allSoldier(Model model){
+    public String allSoldier(Model model) {
         model.addAttribute("soldiers", soldierService.getSoldiers());
         return "admin/allSoldier";
     }
-    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
-    public String editSoldier(@PathVariable long id, Model model) {
-        model.addAttribute("soldier", soldierService.get(id));
-        return "admin/editSoldier";}
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editSoldier(@PathVariable String id, Model model) {
+        try{
+            Long idl = Long.parseLong(id);
+        Soldier soldier = soldierService.get(idl);
+        model.addAttribute("soldier", soldierService.get(idl));
+        System.out.println("halo");
+        System.out.println(soldier.equals(null));
+        System.out.println("Żołnierz ");
+
+            soldier.toString();
+
+        } catch (Exception s) {
+            model.addAttribute("message", "Soldier not exist");
+            return "redirect:/404";
+        }
+        return "admin/editSoldier";
+    }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public  String editSoldier(Soldier soldier) {
+    public String editSoldier(Soldier soldier) {
+        try{
         soldierService.update(soldier);
+        }catch (Exception e){
+            return "redirect:/404";
+        }
+
         return "redirect:/admin/soldier";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteSoldier(@PathVariable long id) {
-        soldierService.delete(id);
+        try{
+            soldierService.delete(id);
+        }catch (Exception e){
+            return "redirect:/404";
+        }
         return "redirect:/admin/soldier";
     }
 }

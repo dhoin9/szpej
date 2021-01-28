@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderService {
-    public Order get(Long id);
+     Order get(Long id);
 
-    public List<Order> getOrders();
-    public List<Order> getOrdersBySoldier(Soldier soldier);
-    public List<Order> getOrdersBySoldierAndProduct(Soldier soldier, Product product);
-    public void add(Order order);
-    public void delete(Long id);
-    public void deleteList(List<Order> orders);
-    public void update(Order order);
-    public void setInactiveOrders(List<Order> orders);
-    public List<String> getTotal();
-    public List<OrderTotal> getOrderTotal();
-    public List<OrderTotal> getOrderByWarehouse(Warehouse warehouse);
-    public List<Order> ordersByWarehouse(Warehouse warehouse);
-    public Map<Product, Integer> mapOrders();
-    public Map<Product, Integer> mapOrders(Warehouse warehouse);
+     List<Order> getOrders();
+     List<Order> getOrdersBySoldier(Soldier soldier);
+     List<Order> getOrdersBySoldierAndProduct(Soldier soldier, Product product);
+     void add(Order order);
+     void delete(Long id);
+     void deleteList(List<Order> orders);
+     void update(Order order);
+     void setInactiveOrders(List<Order> orders);
+     List<String> getTotal();
+     List<OrderTotal> getOrderTotal();
+     List<OrderTotal> getOrderByWarehouse(Warehouse warehouse);
+     List<Order> ordersByWarehouse(Warehouse warehouse);
+     Map<Product, Integer> mapOrders();
+     Map<Product, Integer> mapOrders(Warehouse warehouse);
 }
