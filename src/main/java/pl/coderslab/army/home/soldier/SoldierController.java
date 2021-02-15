@@ -93,10 +93,8 @@ public class SoldierController {
         try{
             Long idl = Long.parseLong(id);
         Soldier soldier = soldierService.get(idl);
-        model.addAttribute("soldier", soldierService.get(idl));
-        System.out.println("halo");
-        System.out.println(soldier.equals(null));
-        System.out.println("Żołnierz ");
+        model.addAttribute("sold", soldierService.get(idl));
+
 
             soldier.toString();
 
