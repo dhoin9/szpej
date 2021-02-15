@@ -29,7 +29,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         soldier.getRoles().forEach(r ->
                 grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-        System.out.println("Log in:"+ LocalDateTime.now());
+        System.out.println("Log in:"+ LocalDateTime.now()+" id: "+ soldier.getId());
         return new CurrentUser(soldier.getEmail(), soldier.getPassword(),
                 grantedAuthorities, soldier);
     }
