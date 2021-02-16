@@ -20,7 +20,7 @@ public class Donator {
     @JoinColumn(name = "soldier_id")
     private Soldier soldier;
     private String bloodType;
-    private long amount;
+    private float amount;
 
     @Override
     public String toString() {

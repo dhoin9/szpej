@@ -18,7 +18,7 @@ public class Donation {
     private long id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private long volume;
+    private float volume;
     @ManyToOne
     private Donator donator;
 }
