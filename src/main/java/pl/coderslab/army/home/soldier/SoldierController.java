@@ -82,7 +82,7 @@ public class SoldierController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String addSoldier(Model model) {
-        model.addAttribute("soldier", new Soldier());
+        model.addAttribute("sold", new Soldier());
         return "admin/newSoldier";
     }
 

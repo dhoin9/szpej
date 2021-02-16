@@ -32,8 +32,8 @@ public class DonatorController {
         return customUser.getSoldier();
     }
     @GetMapping("")
-    public List<Donator> allDonators(){
-        return donatorService.getAll();
+    public String allDonators(){
+        return "admin/allDonators";
     }
 
     @GetMapping("/{id}")
