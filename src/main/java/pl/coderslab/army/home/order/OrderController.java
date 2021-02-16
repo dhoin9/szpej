@@ -1,10 +1,15 @@
 package pl.coderslab.army.home.order;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductService;
+import pl.coderslab.army.home.soldier.CurrentUser;
 import pl.coderslab.army.home.soldier.Soldier;
 
 import java.util.List;
@@ -25,6 +30,10 @@ public class OrderController {
     @ModelAttribute("NameSize")
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
+    }
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
     }
 
     @GetMapping("/add")

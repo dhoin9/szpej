@@ -1,9 +1,12 @@
 package pl.coderslab.army.home.blood;
 
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.army.home.soldier.CurrentUser;
+import pl.coderslab.army.home.soldier.Soldier;
 
 import java.util.List;
 
@@ -23,7 +26,12 @@ public class DonatorController {
     public List<Donator> getDonators() {
         return donatorService.getAll();
     }
-    @GetMapping("/")
+
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
+    }
+    @GetMapping("")
     public List<Donator> allDonators(){
         return donatorService.getAll();
     }

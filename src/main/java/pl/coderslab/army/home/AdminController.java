@@ -39,12 +39,15 @@ public class AdminController {
     public List<Product> sortedProduct(){
         return productRepository.getProductsOrderByName();
     }
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String details(@AuthenticationPrincipal CurrentUser customUser, Model model){
         Soldier soldier = customUser.getSoldier();
         Warehouse warehouse= soldier.getWarehouse();
-        model.addAttribute("soldier", soldier);
         model.addAttribute("warehouse",warehouse);
         model.addAttribute("prodIn", prodInWarehouseService.getProdInWarehousesTotal(warehouse));
         model.addAttribute("orders", orderService.mapOrders(warehouse));

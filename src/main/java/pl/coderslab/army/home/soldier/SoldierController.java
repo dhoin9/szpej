@@ -1,5 +1,6 @@
 package pl.coderslab.army.home.soldier;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,10 @@ public class SoldierController {
     public List<Role> allRole() {
         return roleRepository.findAll();
     }
-
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
+    }
     @ResponseBody
     @RequestMapping(value = "/{id}")
     public String getSoldier(@PathVariable long id) {

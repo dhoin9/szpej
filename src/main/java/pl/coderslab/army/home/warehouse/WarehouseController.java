@@ -1,14 +1,20 @@
 package pl.coderslab.army.home.warehouse;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.coderslab.army.home.order.OrderService;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductRepository;
 import pl.coderslab.army.home.products.ProductService;
+import pl.coderslab.army.home.soldier.CurrentUser;
+import pl.coderslab.army.home.soldier.Soldier;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +47,10 @@ public class WarehouseController {
     public List<Product> sortedProduct(){
         return productRepository.getProductsOrderByName();
     }
-
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
+    }
 
 //    @GetMapping("/new")
 //    public String addOrder(Model model) {

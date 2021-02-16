@@ -1,5 +1,6 @@
 package pl.coderslab.army.home.products;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import pl.coderslab.army.home.order.OrderService;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
+import pl.coderslab.army.home.soldier.CurrentUser;
 import pl.coderslab.army.home.soldier.Soldier;
 import pl.coderslab.army.home.soldier.SoldierService;
 import pl.coderslab.army.home.warehouse.Warehouse;
@@ -49,7 +51,10 @@ public class ProductController {
     public List<Product> sortedProduct() {
         return productRepository.getProductsOrderByName();
     }
-
+    @ModelAttribute("soldier")
+    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
+        return customUser.getSoldier();
+    }
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String allProducts(Model model) {
         model.addAttribute("prodIn", prodInWarehouseService.getProdInWarehousesTotal());
