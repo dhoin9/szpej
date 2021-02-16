@@ -66,7 +66,7 @@ public class SoldierController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addSoldier(@Valid @ModelAttribute("soldier") Soldier soldier, BindingResult result, Model model) {
+    public String addSoldier(@Valid @ModelAttribute("sold") Soldier soldier, BindingResult result, Model model) {
         if (soldierService.getSoldier(soldier.getEmail()) != null) {
             model.addAttribute("error", "already exist");
             return "admin/newSoldier";
