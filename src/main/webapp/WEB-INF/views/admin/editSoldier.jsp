@@ -22,8 +22,8 @@
              <form:hidden path="password" value="${password}"/>
             <br> Warehouse <form:select path="warehouse.id" items="${warehouses}" itemLabel="name"  itemValue="id"/>
             <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />
-            <br>Yes <form:radiobutton path="enabled" value="1"/>
-            No <form:radiobutton path="enabled" value="0"/>
+            <br>  Enable:  <form:radiobutton path="enabled" value="1" label="Yes"/>
+             <form:radiobutton path="enabled" value="0" label="No"/>
 
             <br>  <input type="submit" value="Save">
         </form:form>
