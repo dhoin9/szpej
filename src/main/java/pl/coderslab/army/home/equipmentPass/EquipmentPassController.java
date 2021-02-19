@@ -1,5 +1,6 @@
 package pl.coderslab.army.home.equipmentPass;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouse;
 import pl.coderslab.army.home.prodInWarehouse.ProdInWarehouseService;
 import pl.coderslab.army.home.products.Product;
 import pl.coderslab.army.home.products.ProductService;
+import pl.coderslab.army.home.soldier.CurrentUser;
 import pl.coderslab.army.home.soldier.Soldier;
 import pl.coderslab.army.home.soldier.SoldierService;
 import pl.coderslab.army.home.warehouse.WarehouseService;
@@ -46,7 +48,10 @@ public class EquipmentPassController {
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
     }
-
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+        return  customUser.getSoldier();
+    }
     @ModelAttribute("productsWarehouse")
     public List<ProdInWarehouse> getProductInWare() {
         return prodInWarehouseService.getProdInWarehouses();

@@ -27,9 +27,10 @@ public class DonatorController {
         return donatorService.getAll();
     }
 
-    @ModelAttribute("soldier")
-    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser.getSoldier();
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+
+        return  customUser.getSoldier();
     }
     @GetMapping("")
     public String allDonators(){
@@ -52,7 +53,6 @@ public class DonatorController {
     }
     @GetMapping("/{idp}/new")
     public String addDonation( Model model){
-//        model.addAttribute("donator", donatorService.get(id));
         model.addAttribute("donation", new Donation());
      return "admin/newDonation";
     }

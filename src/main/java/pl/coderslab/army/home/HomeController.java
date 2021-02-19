@@ -6,6 +6,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.army.home.blood.Donation;
+import pl.coderslab.army.home.blood.DonationService;
+import pl.coderslab.army.home.blood.Donator;
+import pl.coderslab.army.home.blood.DonatorService;
 import pl.coderslab.army.home.equipmentPass.EquipmentPassService;
 import pl.coderslab.army.home.order.Order;
 import pl.coderslab.army.home.order.OrderList;
@@ -27,23 +31,36 @@ public class HomeController {
     private final ProductService productService;
     private final RoleRepository roleRepository;
     private final SoldierService soldierService;
+    private final DonationService donationService;
+    private final DonatorService donatorService;
 
-    public HomeController(EquipmentPassService equipmentPassService, OrderService orderService, ProductService productService, RoleRepository roleRepository, SoldierService soldierService) {
+    public HomeController(EquipmentPassService equipmentPassService, OrderService orderService, ProductService productService, RoleRepository roleRepository, SoldierService soldierService, DonationService donationService, DonatorService donatorService) {
         this.equipmentPassService = equipmentPassService;
         this.orderService = orderService;
         this.productService = productService;
         this.roleRepository = roleRepository;
         this.soldierService = soldierService;
+        this.donationService = donationService;
+        this.donatorService = donatorService;
     }
     @ModelAttribute("NameSize")
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
     }
 
-//    @ModelAttribute("soldier")
-//    public Soldier getCurrent(@AuthenticationPrincipal CurrentUser customUser) {
-//        return customUser.getAppUser();
-//    }
+    @ModelAttribute("soldier")
+    public Soldier getCurrent(@AuthenticationPrincipal CurrentUser customUser) {
+        if(customUser==null){
+        System.out.println("current doesnt exist");
+        return new Soldier();
+    }
+        return customUser.getSoldier();
+    }
+    @ModelAttribute("types")
+    public String []bloodTypes(){
+        String [] types = {"ORh+", "ORh-","ARh+", "ARh-", "BRh+", "BRh-","ABRh+","ABRh-"};
+        return  types;
+    }
 
     @RequestMapping("/home")
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -100,6 +117,37 @@ public class HomeController {
         return "redirect:/order";
     }
 
+    @GetMapping("home/donations")
+    public String donations(@AuthenticationPrincipal CurrentUser customUser,Model model){
+        Long soldier = customUser.getSoldier().getId();
+        System.out.println(soldier);
+        model.addAttribute("donator", donatorService.get(soldier));
+        model.addAttribute("donations", donationService.donationBySoldier(soldier));
+        return "user/donator";
+    }
+    @GetMapping("home/createDonator")
+    public String createDonator(Model model){
+        model.addAttribute("donator", new Donator());
+        return "user/newDonator";
+    }
+    @PostMapping("home/createDonator")
+    public String createDonator(Donator donator){
+        System.out.println(donator);
+        System.out.println(donator.getSoldier().getLastName());
+        donatorService.add(donator);
+        return "redirect:/donations";
+    }
+    @PostMapping("home/donations/new")
+    public String addDonation( @AuthenticationPrincipal CurrentUser customUser,Donation donation){
+        donation.setDonator(donatorService.get(customUser.getSoldier().getId()));
+        donationService.add(donation);
+        return "redirect:/admin/donator/";
+    }
+    @GetMapping("home/donations/new")
+    public String addDonation( Model model){
+        model.addAttribute("donation", new Donation());
+        return "admin/newDonation";
+    }
     @GetMapping("/createAdmin")
     public String createAdmin(){
         Soldier soldier = new Soldier();

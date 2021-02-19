@@ -11,5 +11,6 @@ public interface DonationService {
     void update(Order order);
     Donation get(Long id);
     List<Donation> donationBySoldier(Donator donator);
+    List<Donation> donationBySoldier(Long soldier);
     List<Donation> getAll();
 }

@@ -51,9 +51,9 @@ public class ProductController {
     public List<Product> sortedProduct() {
         return productRepository.getProductsOrderByName();
     }
-    @ModelAttribute("soldier")
-    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser.getSoldier();
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+        return  customUser.getSoldier();
     }
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String allProducts(Model model) {

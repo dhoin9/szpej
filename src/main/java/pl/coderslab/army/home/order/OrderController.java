@@ -31,9 +31,9 @@ public class OrderController {
     public Map<String, List<Product>> getMapNameProduct() {
         return productService.getMapNameProduct();
     }
-    @ModelAttribute("soldier")
-    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser.getSoldier();
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+        return  customUser.getSoldier();
     }
 
     @GetMapping("/add")

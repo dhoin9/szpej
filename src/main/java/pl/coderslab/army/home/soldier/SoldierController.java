@@ -39,9 +39,9 @@ public class SoldierController {
     public List<Role> allRole() {
         return roleRepository.findAll();
     }
-    @ModelAttribute("soldier")
-    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser.getSoldier();
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+        return  customUser.getSoldier();
     }
     @ResponseBody
     @RequestMapping(value = "/{id}")
@@ -66,7 +66,7 @@ public class SoldierController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String addSoldier(@Valid @ModelAttribute("sold") Soldier soldier, BindingResult result, Model model) {
+    public String addSoldier(@Valid @ModelAttribute("soldier") Soldier soldier, BindingResult result, Model model) {
         if (soldierService.getSoldier(soldier.getEmail()) != null) {
             model.addAttribute("error", "already exist");
             return "admin/newSoldier";
@@ -82,7 +82,7 @@ public class SoldierController {
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String addSoldier(Model model) {
-        model.addAttribute("sold", new Soldier());
+        model.addAttribute("soldier", new Soldier());
         return "admin/newSoldier";
     }
 
@@ -97,7 +97,7 @@ public class SoldierController {
         try{
             Long idl = Long.parseLong(id);
         Soldier soldier = soldierService.get(idl);
-        model.addAttribute("sold", soldierService.get(idl));
+        model.addAttribute("soldier", soldierService.get(idl));
 
 
             soldier.toString();

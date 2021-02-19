@@ -44,7 +44,12 @@ public class JpaDonationService implements DonationService {
 
     @Override
     public List<Donation> donationBySoldier(Donator donator) {
-        return donationRepository.getAllByDonatorOrderByDateDesc(donator);
+        return donationRepository.getAllByDonatorIdOrderByDateDesc(donator.getId());
+    }
+
+    @Override
+    public List<Donation> donationBySoldier(Long soldier) {
+        return donationRepository.getAllByDonatorIdOrderByDateDesc(soldier);
     }
 
     @Override

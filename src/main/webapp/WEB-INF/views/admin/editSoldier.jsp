@@ -15,7 +15,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
-        <form:form method="post" modelAttribute="sold">
+        <form:form method="post" modelAttribute="soldier">
             <br> Fist Name <form:input path="firstName" value="${firstName}"/>
             <br> Last Name <form:input path="lastName" value="${lastName}"/>
             <br> Email <form:input path="email" value="${email}"/>

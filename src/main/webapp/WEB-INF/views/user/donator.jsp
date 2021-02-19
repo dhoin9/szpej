@@ -2,33 +2,72 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="header.jsp" %>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Create new Soldier</h1>
+    <h1 class="h3 mb-2 text-gray-800">${donator.soldier.firstName} ${donator.soldier.lastName} Grupa krwi ${donator.bloodType} Całkowita donacja ${donator.amount} l</h1>
 <%--        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>--%>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Donations List</h6>
+        </div>
 
-        <form:form method="post" modelAttribute="soldier">
-            <br> Fist Name <form:input path="firstName"/>
-            <form:errors path="firstName" style="color:red"/>
-            <br> Last Name <form:input path="lastName"/>
-            <form:errors path="lastName" style="color:red"/>
+            <div class="card-header py-3">
+                <form action="<c:url value="/home/donations/new"/>">
+                    <input type="submit" value="New Donation" class="btn btn-primary">
 
-            <br> Email <form:input path="email"/> <c:out value="${error}"></c:out>
-            <form:errors path="email" style="color:red"/>
-            <br> Password <form:input path="password"/>
-            <br> Warehouse <form:select path="warehouse.id" items="${warehouses}" itemLabel="name"  itemValue="id"/>
-            <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />
-            <br> Enabled <form:checkbox path="enabled" value="1" />
-            <br>  <input type="submit" value="Save">
-             </form:form>
+                </form>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Volume</th>
+                        <th>Date</th>
+                        <%--                        <th>Email</th>--%>
+                        <%--                        <th>Unit</th>--%>
+                        <%--                        <th>Enable</th>--%>
+                        <%--                        <th>Actions</th>--%>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Volume</th>
+                        <th>Date</th>
+<%--                        <th>Email</th>--%>
+<%--                        <th>Unit</th>--%>
+<%--                        <th>Enable</th>--%>
+<%--                        <th>Actions</th>--%>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <c:set var="count" value="0" scope="page"/>
+                    <c:forEach items="${donations}" var="donation">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
+                        <tr>
+                            <th>${count}</th>
+                            <th>${donation.volume}</th>
+                            <th>${donation.date}</th>
+<%--                            <th><a href="/admin/soldier/edit/${soldier.id}">Edit</a>--%>
+<%--                                <a href="/admin/soldier/delete/${soldier.id}">Delete</a>--%>
+<%--                            <a href="/admin/equipment/${soldier.id}">Details</a></th>--%>
+<%--                            </th>--%>
+                             </tr>
+
+
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
 </div>
 <!-- /.container-fluid -->
@@ -100,7 +139,7 @@
 <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
 <%--<script src="<c:url value="/resources/js/demo/chart-area-demo.js" />"></script>--%>
 <%--<script src="<c:url value="/resources/js/demo/chart-pie-demo.js" />"></script>--%>
-<script src="js/password-check.js"></script>
+
 </body>
 
 </html>

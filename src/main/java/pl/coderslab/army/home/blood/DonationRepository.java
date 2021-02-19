@@ -8,7 +8,7 @@ import java.util.List;
 public interface DonationRepository extends JpaRepository<Donation, Long> {
 
     Donation getById(Long id);
-    List<Donation> getAllByDonatorOrderByDateDesc(Donator donator);
+    List<Donation> getAllByDonatorIdOrderByDateDesc(Long donator);
     List<Donation> getAllByDate(LocalDate date);
 
 

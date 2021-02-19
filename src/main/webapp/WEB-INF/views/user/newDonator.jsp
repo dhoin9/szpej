@@ -15,18 +15,16 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
-        <form:form method="post" modelAttribute="soldier">
-            <br> Fist Name <form:input path="firstName"/>
-            <form:errors path="firstName" style="color:red"/>
-            <br> Last Name <form:input path="lastName"/>
-            <form:errors path="lastName" style="color:red"/>
-
-            <br> Email <form:input path="email"/> <c:out value="${error}"></c:out>
-            <form:errors path="email" style="color:red"/>
-            <br> Password <form:input path="password"/>
-            <br> Warehouse <form:select path="warehouse.id" items="${warehouses}" itemLabel="name"  itemValue="id"/>
-            <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />
-            <br> Enabled <form:checkbox path="enabled" value="1" />
+        <form:form method="post" modelAttribute="donator">
+            ${soldier.id}
+            <%--            <br>${soldier}--%>
+<%--            <br> Fist Name <form:select path="soldier.id" value="${soldier.id}"/>--%>
+            <br> <form:hidden path="soldier" value="${soldier.id}" itemValue="id" ></form:hidden>
+            <br> Blood Type<form:select path="bloodType" items="${types}"/>
+            <br> Amount <form:input path="amount"></form:input>
+<%--            <br> Warehouse <form:select path="warehouse.id" items="${warehouses}" itemLabel="name"  itemValue="id"/>--%>
+<%--            <br> Role <form:checkboxes path="roles" items="${roleList}" itemLabel="name"  itemValue="id" />--%>
+<%--            <br> Enabled <form:checkbox path="enabled" value="1" />--%>
             <br>  <input type="submit" value="Save">
              </form:form>
 

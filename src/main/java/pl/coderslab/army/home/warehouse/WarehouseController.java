@@ -47,9 +47,9 @@ public class WarehouseController {
     public List<Product> sortedProduct(){
         return productRepository.getProductsOrderByName();
     }
-    @ModelAttribute("soldier")
-    public Soldier soldier(@AuthenticationPrincipal CurrentUser customUser){
-        return customUser.getSoldier();
+    @ModelAttribute("currentSoldier")
+    public Soldier sortedProduct(@AuthenticationPrincipal CurrentUser customUser){
+        return  customUser.getSoldier();
     }
 
 //    @GetMapping("/new")
