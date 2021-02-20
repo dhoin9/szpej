@@ -135,18 +135,18 @@ public class HomeController {
         System.out.println(donator);
         System.out.println(donator.getSoldier().getLastName());
         donatorService.add(donator);
-        return "redirect:/donations";
+        return "redirect:/home/donations";
     }
     @PostMapping("home/donations/new")
     public String addDonation( @AuthenticationPrincipal CurrentUser customUser,Donation donation){
         donation.setDonator(donatorService.get(customUser.getSoldier().getId()));
         donationService.add(donation);
-        return "redirect:/admin/donator/";
+        return "redirect:/home/donations/";
     }
     @GetMapping("home/donations/new")
     public String addDonation( Model model){
         model.addAttribute("donation", new Donation());
-        return "admin/newDonation";
+        return "user/newDonation";
     }
     @GetMapping("/createAdmin")
     public String createAdmin(){
